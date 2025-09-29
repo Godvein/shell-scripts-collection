@@ -1,6 +1,6 @@
 # passgen.sh
 
-A simple yet Bash script to generate secure random passwords using `openssl`.  
+A simple Bash script to generate secure random passwords using `openssl`.  
 It also provides an option to save generated passwords into a file for later use.
 
 ## Features
