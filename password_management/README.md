@@ -18,11 +18,11 @@ cd shell-scripts-collection
 ```
 Make the script executable:
 ```bash
-`chmod +x passgen.sh` 
+chmod +x passgen.sh 
 ```
 Move it to `/usr/local/bin` (so it can be used system-wide):
 ```bash
-`sudo mv passgen.sh /usr/local/bin/passgen
+sudo mv passgen.sh /usr/local/bin/passgen
 ```
 
 Now you can run `passgen` command from anywhere
