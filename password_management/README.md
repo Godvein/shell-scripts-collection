@@ -13,8 +13,8 @@ It also provides an option to save generated passwords into a file for later use
 
 Clone the repository:
 ```bash
-git clone https://github.com/<your-username>/shell-scripts-collection.git
-cd shell-scripts-collection
+git clone https://github.com/Godvein/shell-scripts-collection.git
+cd shell-scripts-collection/password_management
 ```
 Make the script executable:
 ```bash
