@@ -22,16 +22,16 @@ save_password(){
     #check if path is empty and save in working dir if empty
     if [ -z "$PASSWORD_PATH" ]
     then     
-        echo "###########################################################" >> ankitp_password.txt 2> /dev/null
-        echo "new password created on $(date)" >> ankitp_password.txt 2> /dev/null 
-        echo "$PASSWORD" >> ankitp_password.txt 2> /dev/null
-        echo >> ankitp_password.txt 2> /dev/null
+        echo "###########################################################" >> passgen_password.txt 2> /dev/null
+        echo "new password created on $(date)" >> passgen_password.txt 2> /dev/null 
+        echo "$PASSWORD" >> passgen_password.txt 2> /dev/null
+        echo >> passgen_password.txt 2> /dev/null
            
     else          
-    echo "###########################################################" >> $PASSWORD_PATH/ankitp_password.txt 2> /dev/null
-    echo "new password at created on $(date)" >> $PASSWORD_PATH/ankitp_password.txt 2> /dev/null
-    echo "$PASSWORD" >> $PASSWORD_PATH/ankitp_password.txt 2> /dev/null     
-    echo >> $PASSWORD_PATH/ankitp_password.txt 2> /dev/null
+    echo "###########################################################" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
+    echo "new password at created on $(date)" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
+    echo "$PASSWORD" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null     
+    echo >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
     fi
 
     if [ $? -eq 1 ]
@@ -66,5 +66,3 @@ then #generate password if the first line arguement is an integer
 else    #generate help if no options match 
 	generate_help
 fi
-
-
