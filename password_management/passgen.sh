@@ -1,12 +1,12 @@
 #!/bin/bash
+#initialize boolean save
+save=0
 
 #logic to generate password
 generate_password(){
-	local PASSWORD=$(openssl rand -base64 "$1" 2> /dev/null)
+	PASSWORD=$(openssl rand -base64 "$1" 2> /dev/null)
 	echo "$PASSWORD"
-
-    #check if the second command line arguement is to save the password file
-    if [ "$2" = "--save" ] || [ "$2" = "-s" ]
+    if [ "$save" -eq 1 ]
     then
         save_password "$PASSWORD"
     fi
@@ -47,22 +47,48 @@ generate_help(){
     echo "Looks like you need help"
     echo
 	echo "This is a custom script"
-	echo "create by: Ankit Dware"
+	echo "created by: Ankit Dware"
 	echo
 	echo "The script requires a number to be passed to determine the length of the password"
 	echo 
-	echo "passgen.sh <password_length> --options"
+	echo "passgen.sh <byte_count> --[options]"
 	echo 
 	echo "options:"
-	echo "-s, --save:           save to a file"
+    echo "-s, --save:           save to a file (you will be promted for the save location)"
     echo
     echo "###############################"
 }
-#check if command line arguement is an integer
-if [[ "$1" =~ ^[0-9]+$ ]]
-then #generate password if the first line arguement is an integer
-	generate_password "$1" "$2"
+#check if user has passed command line arguements 
+#loop through the arguements
+while [[ $# -gt 0 ]]
+do
+    #switch case to set variable according to the arguements
+    case "$1" in 
+        -s | --save)
+            #set save to true
+            save=1
+            ;;
+        -h | --help)
+            #generate help
+            generate_help
+            exit 0
+            ;;
+        [0-9]*)
+            #set length
+            byte_count=$1
+            ;;
+        *)
+            #unknown arguement error
+            echo "Unknown option: $1"
+            generate_help
+            exit 1
+            ;;
+    esac
+    shift
+done
 
-else    #generate help if no options match 
-	generate_help
+#if byte_count is given and greated than 0 generate password
+if [[ "$byte_count" =~ ^[0-9]+$ ]] && [ "$byte_count" -gt 0 ]
+then
+    generate_password "$byte_count"
 fi
