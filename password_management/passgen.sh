@@ -71,7 +71,7 @@ detect_utility_copy(){
         xsel --clipboard
 
     else
-        echo"######################################"
+        echo "######################################"
         echo "Error"
         echo "No copy utilities found"
         echo "Please install one of the following"
