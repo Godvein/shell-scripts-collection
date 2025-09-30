@@ -112,6 +112,7 @@ generate_help(){
     echo
     echo "###############################"
 }
+
 #check if user has passed command line arguements 
 #loop through the arguements
 while [[ $# -gt 0 ]]
@@ -149,4 +150,8 @@ done
 if [[ "$byte_count" =~ ^[0-9]+$ ]] && [ "$byte_count" -gt 0 ]
 then
     generate_password "$byte_count"
+else
+#if no byte_count is give generate help
+    generate_help
 fi
+
