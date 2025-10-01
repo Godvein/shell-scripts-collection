@@ -1,7 +1,9 @@
 #!/bin/bash
-#initialize boolean save
+#initialize booleans
 save=0
 copy=0
+mega=0
+passpath=0 #helps indicate if the path to save file has been given
 
 #logic to generate password
 generate_password(){
@@ -20,6 +22,11 @@ generate_password(){
         copy_password "$PASSWORD"
     fi
 
+    #show mega 
+    if [ "$mega" -eq 1 ]
+    then
+        save_mega "$PASSWORD"
+    fi
 }
 
 #logic to save password file
@@ -35,6 +42,7 @@ save_password(){
     #check if path is empty and save in working dir if empty
     if [ -z "$PASSWORD_PATH" ]
     then     
+        passpath=0 
         echo "###########################################################" >> passgen_password.txt 2> /dev/null
         echo "new password created on $(date)" >> passgen_password.txt 2> /dev/null
         echo "email/username: $email" >> passgen_password.txt 2> /dev/null
@@ -43,6 +51,7 @@ save_password(){
            
     else          
     #condition if save path is given
+    passpath=1
     echo "###########################################################" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
     echo "new password at created on $(date)" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
     echo "email/username: $email" >> $PASSWORD_PATH/passgen_password.txt 2> /dev/null
@@ -93,6 +102,29 @@ copy_password(){
     fi
 }
 
+#mega save cloud storage
+save_mega(){
+    #ask file location in cloud
+    read -p "where do you want to put the file inside mega?" megalocation
+    if [ "$passpath" -eq 1 ]
+    then
+        mega-put $PASSWORD_PATH/passgen_password.txt $megalocation
+    else
+        mega-put passgen_password.txt $megalocation
+    fi
+
+    if [ "$?" -ne 0 ]
+    then
+        echo "####################################################"
+        echo "Mega Error"
+        echo "looks like mega-cli couldnt be found."
+        echo "Or maybe the file isnt there to upload"
+        echo "Please install mega to save password file to cloud and user -s to save the file to upload using --mega"
+        echo "####################################################"
+    fi
+
+}
+
 #generate help function
 generate_help(){
 	echo "#################################"
@@ -109,6 +141,7 @@ generate_help(){
 	echo "options:"
     echo "-s, --save:           save to a file (you will be promted for the save location)"
     echo "-c, --copy:           copy to clipboard "
+    echo "--mega:               save file to mega cloud (requires mega-cli to be installed)"
     echo
     echo "###############################"
 }
@@ -131,6 +164,10 @@ do
         -c | --copy)
             #copy to clipboard
             copy=1
+            ;;
+        --mega)
+            #save to cloud mega
+            mega=1
             ;;
         [0-9]*)
             #set length
