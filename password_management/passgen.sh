@@ -119,7 +119,7 @@ save_mega(){
         echo "Mega Error"
         echo "looks like mega-cli couldnt be found."
         echo "Or maybe the file isnt there to upload"
-        echo "Please install mega to save password file to cloud and user -s to save the file to upload using --mega"
+        echo "Please install mega to save password file to cloud and use -s to save the file to upload using --mega"
         echo "####################################################"
     fi
 
