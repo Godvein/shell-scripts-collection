@@ -26,3 +26,7 @@ sudo mv passgen.sh /usr/local/bin/passgen
 ```
 
 Now you can run `passgen` command from anywhere
+
+## mega-cli Installation guide
+The script uses mega cloud to save the password file to cloud.
+Please follow the [Mega CLI Installation guide](https://github.com/meganz/MEGAcmd) 
