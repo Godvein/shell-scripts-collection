@@ -1,3 +1,5 @@
+import os
+import sys
 from re import A
 from textual.app import App
 from textual.screen import Screen
@@ -66,8 +68,15 @@ class Disk(Screen):
     def action_go_process(self):
         self.app.pop_screen()
 
+def get_css_path(filename):
+    # If running as a PyInstaller executable, files are in _MEIPASS
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, filename)
+    return filename
+
 class Tsystem(App):
-    CSS_PATH = "main.css"
+
+    CSS_PATH = get_css_path("main.css")
 
     def on_mount(self):
         self.push_screen(Process())
