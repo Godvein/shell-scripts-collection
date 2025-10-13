@@ -1,0 +1,22 @@
+.static-widget {
+    width: 100%;
+    height: 100%;
+    background: #1a1b26;           /* dark background */
+    border: solid #3c3f51;         /* subtle border */
+    padding: 1 2;
+}
+
+Label {
+    color: #a9b1d6;                /* light gray text */
+    padding: 1;
+    overflow-y: auto;              /* allow scrolling */
+}
+
+/* Style all buttons with the class "sort-button" */
+.sort-button {
+    background: #3c3f51;       /* dark gray background */
+    color: #d7dae0;            /* light text */
+    padding: 0 2;              /* horizontal padding */
+    border: solid #7dcfff;     /* thin cyan border */
+}
+
