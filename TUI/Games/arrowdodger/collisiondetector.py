@@ -5,6 +5,7 @@ class HACollisionDetector:
         self.arrow = arrow
 
     def detect(self):
+        # AABB collision detection
         return (self.hero.x < self.arrow.x + self.arrow.width and 
             self.hero.x + self.hero.width > self.arrow.x and
             self.hero.y < self.arrow.y + self.arrow.height and
