@@ -1,0 +1,40 @@
+from arrow import Arrow
+from collisiondetector import HACollisionDetector
+import random
+
+class ArrowSpawner:
+
+    def __init__(self, stdscr, state):
+        self.max_y, self.max_x = stdscr.getmaxyx()
+        self.tick = 0
+        self.arrows = []
+        self.state = state
+        self.collisiondetector = HACollisionDetector(None, None)
+        
+    def detectcollision(self, hero):
+        for arrow in self.arrows:
+            self.collisiondetector = HACollisionDetector(hero, arrow)
+            if self.collisiondetector.detect():
+                return True
+
+        return False
+                
+    def spawn(self):
+        if self.tick % 10 == 0:
+            random_y = random.randint(1, self.max_y - 2)
+            self.arrows.append(Arrow(self.max_x - 7, random_y, self.state))
+
+        self.tick += 1
+
+    def update(self, stdscr):
+        for arrow in list(self.arrows):
+            arrow.update(stdscr)
+ 
+    def draw(self, stdscr):
+        for arrow in list(self.arrows):
+            arrow.draw(stdscr)
+        self.arrows = [a for a in self.arrows if not a.out_of_bounds]
+
+            
+           
+

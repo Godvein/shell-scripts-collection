@@ -3,10 +3,14 @@ import os
 class Hero:
 
     def __init__(self, x, y):
+        #hero stats 
+        self.health = 100
+        self.velocity = 1
+
         # 2d vector location
         self.x = x
         self.y = y
-        self.velocity = 1
+
         # state for animation
         self.state = "idle"
 
@@ -15,28 +19,25 @@ class Hero:
         self.frame_index = 0
         self.tick = 0
 
+        # collision variable
+        self.width = max(len(line) for line in self.frames[0])
+        self.height = len(self.frames[0])
+
     def load_frames(self):
-        default_sprite = [
-                [
-                " o ",
-               "/|\\",
-               " /\\"
-                ],
-                ]
-        if self.state == "idle":
-            folder = os.path.join(os.path.dirname(__file__), "sprites/idle_hero") # gives absolute path to idle animation folder
-            frames = [] # initialize empty frames array
+        folder = os.path.join(os.path.dirname(__file__), "sprites/idle_hero") # gives absolute path to idle animation folder
+        frames = [] # initialize empty frames array
 
         # loop the listed and sorted files in animation folder path
-            for file in sorted(os.listdir(folder)):
+        for file in sorted(os.listdir(folder)):
+
+            if self.state == "idle":
                 if file.startswith("idle"):
                 # open with absolute path to the animatio .txt file as f
                     with open(os.path.join(folder, file)) as f: 
                         frames.append(f.read().splitlines()) # add the txt animation to frames array
 
         # now frames is 2d array
-            return frames 
-        return default_sprite
+        return frames 
 
     def move(self, key, stdscr):
         screen_height, screen_width = stdscr.getmaxyx()
