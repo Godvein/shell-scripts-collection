@@ -4,7 +4,7 @@ class Arrow:
 
     def __init__(self, x, y, state):
         # arrow stats
-        self.velocity = 5
+        self.velocity = 10
         
         # arrow location
         self.x = x

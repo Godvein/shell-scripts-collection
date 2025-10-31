@@ -4,7 +4,7 @@ import random
 
 class ArrowSpawner:
 
-    def __init__(self, stdscr, state):
+    def __init__(self, stdscr, state, difficulty):
         # get screen max x and y
         self.max_y, self.max_x = stdscr.getmaxyx()
 
@@ -19,7 +19,10 @@ class ArrowSpawner:
 
         #initialize collisiondetector
         self.collisiondetector = HACollisionDetector(None, None)
-        
+       
+        # difficulty settings
+        self.difficulty = difficulty
+
     def detectcollision(self, hero):
         # collision detection check every arrow in arrows
         for arrow in self.arrows:
@@ -33,8 +36,13 @@ class ArrowSpawner:
         # spawn arrow every 10 ticks fucntion call
         if self.tick % 10 == 0:
             random_y = random.randint(1, self.max_y - 2)
-            # random arrow spa wn
-            self.arrows.append(Arrow(self.max_x - 7, random_y, self.state))
+            arrow = Arrow(self.max_x - 7, random_y, self.state)
+            # random arrow spawn
+            self.arrows.append(arrow)
+            if self.difficulty == "hard":
+                arrow.velocity = 15
+            if self.difficulty == "easy":
+                arrow.velocity = 5
 
         self.tick += 1
 
