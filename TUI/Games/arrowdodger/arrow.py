@@ -17,7 +17,7 @@ class Arrow:
 
         self.out_of_bounds = False
  
-        # collision variable
+        # default collision variable
         self.width = 6
         self.height = 1
 
@@ -42,7 +42,7 @@ class Arrow:
     def update(self, stdscr):  
         max_y, max_x = stdscr.getmaxyx()
         # logic to check arrow in or out of bounds
-        if self.y < 0 or self.y > max_y or self.x < 5 or self.x > max_x:
+        if self.y < 0 or self.y > max_y or self.x < 6 or self.x > max_x:
             self.out_of_bounds = True
 
         # logic to move right spawn arrows if not out of bounds and every 5 function call
