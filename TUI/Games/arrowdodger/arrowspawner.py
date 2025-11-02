@@ -40,9 +40,9 @@ class ArrowSpawner:
             # random arrow spawn
             self.arrows.append(arrow)
             if self.difficulty == "hard":
-                arrow.velocity = 15
+                arrow.velocity = 20
             if self.difficulty == "easy":
-                arrow.velocity = 5
+                arrow.velocity = 10
 
         self.tick += 1
 

@@ -65,9 +65,9 @@ def main(stdscr, difficulty):
             arrowspawner.spawn()
             arrowspawner.update(stdscr)
 
-            # change hero color if collision with arrow
+            # change hero color and health change if collision with arrow
             if arrowspawner.detectcollision(hero):
-                hero.health -= 1
+                hero.health -= 5
                 hero_color = curses.color_pair(4)
             else:
                 hero_color = curses.color_pair(1)

@@ -58,7 +58,7 @@ class Hero:
         # move up
         if key == ord('s'):
             self.y = self.y + self.velocity
-            if self.y > screen_height-5:
+            if self.y > screen_height-7:
                 return True
         # move left
         if key == ord('a'):
